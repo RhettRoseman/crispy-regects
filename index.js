@@ -40,10 +40,7 @@ function showQuestions() {
                 break;
             // Add cases for other choices as needed
         }
-    });
-}
-    name: "choice"
-.then( answers => {
+    }).then( answers => {
     console.log(answer.choice); {
         switch (answers.choice) {
             case "View All Employees":
@@ -66,6 +63,10 @@ function showQuestions() {
             updateEmloyees()
             break;
 
+            default:
+            connection.end()
+            break;
+
          }
     }
-});
+})};
