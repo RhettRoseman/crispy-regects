@@ -78,11 +78,11 @@ function showQuestions() {
    function(err,data){
     if (err) throw err;
     console.table(data);
-    askQuestions();
-   })
+   
+   }); showQuestions();
 })}
 
-function addRole() {
+function newRole() {
     inquirer.prompt([
         {
             message: "Enter Title:",
@@ -102,6 +102,7 @@ function addRole() {
    function(err,data){
     if (err) throw err;
     console.table(data);
-   }
- })
+    
+   }; showQuestions(); 
+ }) 
 }
