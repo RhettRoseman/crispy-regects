@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const inquirer = import('inquirer');
 
@@ -8,6 +8,7 @@ var connection = mysql.createConnection({
     port: 3306,
     user: "root",
     database: "employeeDB"
+
 });
 
 connection.connect(function (err) {
@@ -29,19 +30,9 @@ function showQuestions() {
             "New Role",
             "Update Employee Role",
         ]
-    }).then((answers) => {
-        // Handle user's choice here
-        switch (answers.userChoice) {
-            case "View All Employees":
-                // Do something for this choice
-                break;
-            case "View All Departments":
-                // Do something for this choice
-                break;
-            // Add cases for other choices as needed
-        }
     }).then( answers => {
     console.log(answer.choice); {
+    // handle prompt answer choices  
         switch (answers.choice) {
             case "View All Employees":
             viewEmloyees()
@@ -70,3 +61,17 @@ function showQuestions() {
          }
     }
 })};
+// connection.query('SELECT * FROM employee', (error, results, fields) => {
+//     if (error) {
+//       console.error(error);
+//       return;
+//     }});
+
+function viewEmloyees() {
+    connection.query("SELECT * FROM employee",
+    function (err, data) {
+        if (err) throw err
+        console.table(data)
+        showQuestions();
+    })
+}
