@@ -1,4 +1,5 @@
 const mysql = require('mysql2');
+const { type } = require('os');
 
 const inquirer = import('inquirer');
 
@@ -35,7 +36,7 @@ function showQuestions() {
     // handle prompt answer choices  
         switch (answers.choice) {
             case "View All Employees":
-            viewEmloyees()
+            viewEmployees()
             break;
 
             case "View All Departments":
@@ -43,7 +44,7 @@ function showQuestions() {
             break;
 
             case "New Employees":
-            newEmloyees()
+            newEmployees()
             break;
 
             case "New Role":
@@ -51,7 +52,7 @@ function showQuestions() {
             break;
 
             case "Update Employee Role":
-            updateEmloyees()
+            updateEmployees()
             break;
 
             default:
@@ -61,17 +62,46 @@ function showQuestions() {
          }
     }
 })};
-// connection.query('SELECT * FROM employee', (error, results, fields) => {
+// connection.query('SELECT * FROM employee', 
 //     if (error) {
 //       console.error(error);
 //       return;
 //     }});
+ function addDepartment() {
+    inquirer.prompt([{
+        type: "imput",
+        name:  "department",
+        message: "What is the Department you would like to add?"     
+},
+]).then(function(res) {
+    connection.query('INSERT INTO department (name) VALUES (?)', [res.department_id],
+   function(err,data){
+    if (err) throw err;
+    console.table(data);
+    askQuestions();
+   })
+})}
 
-function viewEmloyees() {
-    connection.query("SELECT * FROM employee",
-    function (err, data) {
-        if (err) throw err
-        console.table(data)
-        showQuestions();
-    })
+function addRole() {
+    inquirer.prompt([
+        {
+            message: "Enter Title:",
+            type: "input",
+            name: "title"
+        }, {
+            message: "Enter Salary:",
+            type: "number",
+            name: "salary",
+        }, {
+            message: "Enter Department ID:",
+            type: "number",
+            name: "department_id"
+        },
+ ]).then(function (response) {
+    connection.query('INSERT INTO roles(title, salary, department_id) values (?, ?, ?)', ) [res.title, res.salary, res.department_id],
+   function(err,data){
+    if (err) throw err;
+    console.table(data);
+   }
+ })
 }
