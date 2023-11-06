@@ -1,8 +1,19 @@
 {
   "dependencies": {
-    "inquirer": "^9.2.11",
+    "express": "^4.18.2",
+    "inquirer": "^8.2.4",
     "mysql": "^2.18.1",
     "mysql2": "^3.6.3",
     "node": "^21.1.0"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "crispy-regects",
+  "version": "1.0.0",
+  "description": "employee-tracker-mysql",
+  "main": "index.js",
+  "devDependencies": {},
+  "author": "RhettRoseman",
+  "license": "ISC"
 }

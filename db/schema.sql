@@ -3,17 +3,24 @@ CREATE DATABASE employees_db;
 
 USE employees_db;
 
-CREATE TABLE department (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(30) NOT NULL
+SELECT * FROM employees_db;
+
+-- CREATE TABLE department (
+--   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+--   name VARCHAR(30) NOT NULL
+-- );
+
+
+CREATE TABLE employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    email VARCHAR(255),
+    department VARCHAR(255),
+    position VARCHAR(255),
+    salary INT
 );
 
-CREATE TABLE employee_names (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(30) NOT NULL,
-  department INT,
-  FOREIGN KEY (department)
-  REFERENCES department(id)
-  ON DELETE SET NULL
-);
+
+
 
