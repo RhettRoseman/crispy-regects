@@ -1,11 +1,11 @@
 # crispy-regects
 
 ## Description
-If I want to track my employee database
+IF I want to track my employee database
 
-Then I start the prompts with ```node index.js```
+THEN I start the prompts with ```node index.js```
 
-Then I am met with options 
+THEN I am met with options 
 
 IF I select View All Emplpoyees 
 
