@@ -5,12 +5,6 @@ USE employees_db;
 
 SELECT * FROM employees_db;
 
--- CREATE TABLE department (
---   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
---   name VARCHAR(30) NOT NULL
--- );
-
-
 CREATE TABLE employees (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(255),

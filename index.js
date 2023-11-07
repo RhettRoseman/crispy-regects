@@ -13,14 +13,15 @@ var connection = mysql.createConnection({
 
 
 
-});
+}
+);
 
 connection.connect(function (err) {
     if (err) {
         throw err;
-        // console.log('Connected as ID#' + connection.threadId + "\n")
     } else { showQuestions() }
-})
+}
+)
 
 
 function showQuestions() {
@@ -30,7 +31,7 @@ function showQuestions() {
         name: "userChoice",
         choices: [
             "View All Employees",
-            "View All Departments",
+            // "View Departments",
             "New Employees",
             "New Department",
             "New Role",
@@ -44,9 +45,9 @@ function showQuestions() {
                     viewEmployees()
                     break;
 
-                case "View All Departments":
-                    viewDepartments()
-                    break;
+                // case "View AllDepartments":
+                //     viewDepartments()
+                //     break;
 
                 case "Add new Department":
                     addDepartment()
@@ -70,63 +71,82 @@ function showQuestions() {
 
             }
         }
-    })
+    }
+    )
 };
-// connection.query('SELECT * FROM employee', 
-//     if (error) {
-//       console.error(error);
-//       return;
-//     }});
+
 function viewEmployees() {
     connection.query("SELECT * FROM employees", function (err, data) {
         if (err) throw err;
         console.table(data);
-    });
-}
-function viewDepartments() {
-    connection.query("SELECT * FROM departments")
-    function viewEmployees() {
-        connection.query('SELECT * FROM departments',
-            function (err, data) {
-                if (err) throw err;
-                console.table(data);
-            });
     }
-};
+    );
+}
 
-// }function addDepartment() {
-//     inquirer.prompt([{
-//         type: "input",
-//         name:  "department",
-//         message: "What is the Department you would like to add?"     
-// },
-// ]).then(function(res) {
-//     connection.query('INSERT INTO department (name) VALUES (?)', [res.department_id],
-//    function(err,data){
-//     if (err) throw err;
-//     console.table(data);
-
-//   }); 
-//showQuestions();
-
-// })}
 
 function newEmployees() {
     inquirer.prompt([
         {
             message: "Employees first name:",
             type: "input",
-            name: "firstname",
+            name: "first_name",
         },
         {
             message: "Employee last name:",
             type: "input",
-            name: "lastname",
+            name: "last_name",
+        },
+        {
+            message: "Employee email:",
+            type: "input",
+            name:"email",
+        
+        },
+        {
+            message: "Employee department:",
+            type: "list",
+            name:"department",
+            choices : [
+                "Engineering",
+                "Marketing",
+                "Sales",
+            ],
+        },
+        {
+            message: "Employee position:",
+            type: "list",
+            name:"position",
+            choices: [
+                "Software Engineer",
+                "Junior Engineer",
+                "Product Manager",
+                "Marketing Specialist",
+                "Sales Representitive",
+                "Sales Manager",
+                
+            ],
+        },
+        {
+            message: "Employee Salary:",
+            type: "list",
+            name:"salary",
+            choices: [
+                50000,
+                60000,
+                65000,
+                70000,
+                75000,
+                80000,
+                85000,
+                90000,
+                100000,
+            ],
         },
 
 
     ]).then(function (res) {
-        connection.query('INSERT INTO employees(first_name, last_name) VALUES (?,?)', [res.first_name, res.last_name],
+        connection.query("INSERT INTO employees (first_name, last_name, email, department, position, salary) VALUES (?, ?, ?, ?, ?, ?)",
+        [res.first_name, res.last_name, res.email, res.department, res.position, res.salary],
             function (err, data) {
                 if (err) throw err;
                 console.table(data);
@@ -134,51 +154,128 @@ function newEmployees() {
                 showQuestions()
 
             }  
-        );
-      
-    }
+        )
+        }
     )
-};
-
+}
+       
+  
 function newRole() {
     inquirer.prompt([
         {
-            message: "Enter Title:",
-            type: "input",
-            name: "title"
-        }, {
-            message: "Enter Salary:",
-            type: "number",
+            message: "Enter Department:",
+            type: "list",
+            name: "title",
+            choices : [
+                "Engineering",
+                "Marketing",
+                "Sales",
+            ],
+        }, 
+        {
+            message: "Enter position:",
+            type: "list",
+            name: "position",
+            choices: [
+                "Software Engineer",
+                "Junior Engineer",
+                "Product Manager",
+                "Marketing Specialist",
+                "Sales Representitive",
+                "Sales Manager",
+                
+            ],
+        },
+        {
+            message:"Enter Salary",
+            type: "list",
             name: "salary",
-        }, {
-            message: "Enter Department ID:",
-            type: "number",
-            name: "department_id"
+            choices: [
+                50000,
+                60000,
+                65000,
+                70000,
+                75000,
+                80000,
+                85000,
+                90000,
+                100000,
+            ],
         },
     ]).then(function (res) {
-        connection.query('INSERT INTO employees(title, salary, department_id) values (?, ?, ?)',)[res.title, res.salary, res.department_id],
+        connection.query('INSERT INTO employees (department, position, salary) VALUES (?, ?, ?)', [res.department, res.position, res.salary],
             function (err, data) {
                 if (err) throw err;
                 console.table(data);
 
-            }; showQuestions();
-    })
-}
+                showQuestions()
+
+            }  
+        )
+        }
+    ),
 function updateEmployees() {
     inquirer.prompt([
         {
-            message: "Which employee do you want to update: Use first name:",
+            message: "Employee email:",
             type: "input",
-            name: " employees_id",
+            name:"email",
         },
         {
-            message: "Enter the new role id:",
-            type: "input",
-            name: "role_id",
+            message: "Employee department:",
+            type: "list",
+            name:"department",
+            choices : [
+                "Engineering",
+                "Marketing",
+                "Sales",
+            ],
+        },
+        {
+            message: "Employee position:",
+            type: "list",
+            name:"position",
+            choices: [
+                "Software Engineer",
+                "Junior Engineer",
+                "Product Manager",
+                "Marketing Specialist",
+                "Sales Representitive",
+                "Sales Manager",
+                
+            ],
+        },
+        {
+            message: "Employee Salary:",
+            type: "list",
+            name:"salary",
+            choices: [
+                50000,
+                60000,
+                65000,
+                70000,
+                75000,
+                80000,
+                85000,
+                90000,
+                100000,
+            ],
         },
 
+
     ]).then(function (res) {
-        connection.query('INSERT INTO employees(employee_id, role_id) values (?, ?)',)[res.employee_id, res.role_id]
-    }
+        connection.query("UPDATE employees SET department = ?, position = ?, salary = ? WHERE email = ?",
+            function (err, data) {
+                if (err) throw err;
+                console.table(data);
+
+                showQuestions()
+
+            }  
+        )
+        }
     )
 }
+}
+
+    
