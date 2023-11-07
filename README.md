@@ -1,4 +1,4 @@
-# crispy-regects
+# Employee Tracker
 
 ## Description
 IF I want to track my employee database
