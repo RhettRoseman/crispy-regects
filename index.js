@@ -31,10 +31,10 @@ function showQuestions() {
         name: "userChoice",
         choices: [
             "View All Employees",
-            // "View Departments",
+             "View Departments",
             "New Employees",
-            // "New Department",
-            // "New Role",
+             "New Department",
+            "New Role",
             "Update Employee Role",
         ],
     }).then(answers => {
@@ -210,67 +210,65 @@ function newRole() {
         )
         }
     )};
-// function updateEmployees() {
-//     inquirer.prompt([
-//         {
-//             message: "Employee email:",
-//             type: "input",
-//             name:"email",
-//         },
-//         {
-//             message: "Employee department:",
-//             type: "list",
-//             name:"department",
-//             choices : [
-//                 "Engineering",
-//                 "Marketing",
-//                 "Sales",
-//             ],
-//         },
-//         {
-//             message: "Employee position:",
-//             type: "list",
-//             name:"position",
-//             choices: [
-//                 "Software Engineer",
-//                 "Junior Engineer",
-//                 "Product Manager",
-//                 "Marketing Specialist",
-//                 "Sales Representitive",
-//                 "Sales Manager",
+function updateEmployees() {
+    inquirer.prompt([
+        {
+            message: "Employee email:",
+            type: "input",
+            name:"email",
+        },
+        {
+            message: "Employee department:",
+            type: "list",
+            name:"department",
+            choices : [
+                "Engineering",
+                "Marketing",
+                "Sales",
+            ],
+        },
+        {
+            message: "Employee position:",
+            type: "list",
+            name:"position",
+            choices: [
+                "Software Engineer",
+                "Junior Engineer",
+                "Product Manager",
+                "Marketing Specialist",
+                "Sales Representitive",
+                "Sales Manager",
                 
-//             ],
-//         },
-//         {
-//             message: "Employee Salary:",
-//             type: "list",
-//             name:"salary",
-//             choices: [
-//                 50000,
-//                 60000,
-//                 65000,
-//                 70000,
-//                 75000,
-//                 80000,
-//                 85000,
-//                 90000,
-//                 100000,
-//             ],
-//         },
+            ],
+        },
+        {
+            message: "Employee Salary:",
+            type: "list",
+            name:"salary",
+            choices: [
+                50000,
+                60000,
+                65000,
+                70000,
+                75000,
+                80000,
+                85000,
+                90000,
+                100000,
+            ],
+        },
 
 
-//     ]).then(function (res) {
-//         connection.query("UPDATE employees SET department = ?, position = ?, salary = ? WHERE email = ?",
-//             function (err, data) {
-//                 if (err) throw err;
-//                 console.table(data);
+    ]).then(function (res) {
+        connection.query("UPDATE employees SET department = ?, position = ?, salary = ? WHERE email = ?",
+            function (err, data) {
+                if (err) throw err;
+                console.table(data);
 
-//                 showQuestions()
+                showQuestions()
 
-//             }  
-//         )
-//         }
-//     )
-// }
-// }
-
+            }  
+        )
+        }
+    )
+}
